@@ -10,8 +10,8 @@ POST http://localhost:3001/api/blogs
 Content-Type: application/json
 
 {
-    "title": "Pravasi",
-    "author": "Thakara",
+    "title": "Ala",
+    "author": "Dana",
     "url": "http://example.com/new-blog",
     "likes": 0
 }
