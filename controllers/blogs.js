@@ -52,35 +52,24 @@ blogsRouter.post("/", (request, response, next) => {
 });
 
 // New PUT endpoint to handle updates
-blogsRouter.put("/:id", (request, response, next) => {
-  const body = request.body;
+blogsRouter.put("/:id", async (request, response) => {
+  const { title, author, url, likes } = request.body;
 
-  if (!body.title || !body.author) {
-    return response.status(400).json({
-      error: "Title or Author missing",
-    });
+  if (!title || !author) {
+    return response.status(400).json({ error: "Title or Author missing" });
   }
 
-  const blog = {
-    title: body.title,
-    author: body.author,
-    url: body.url,
-    likes: body.likes,
-  };
+  const updatedBlog = await Blog.findByIdAndUpdate(
+    request.params.id,
+    { title, author, url, likes },
+    { new: true, runValidators: true, context: "query" }
+  );
 
-  Blog.findByIdAndUpdate(request.params.id, blog, {
-    new: true,
-    runValidators: true,
-    context: "query",
-  })
-    .then((updatedBlog) => {
-      if (updatedBlog) {
-        response.json(updatedBlog);
-      } else {
-        response.status(404).end();
-      }
-    })
-    .catch((error) => next(error));
+  if (!updatedBlog) {
+    return response.status(404).json({ error: "Blog not found" });
+  }
+
+  response.json(updatedBlog);
 });
 
 module.exports = blogsRouter;
