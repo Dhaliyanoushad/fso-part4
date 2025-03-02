@@ -30,12 +30,8 @@ blogsRouter.delete("/:id", (request, response, next) => {
 blogsRouter.post("/", (request, response, next) => {
   const body = request.body;
 
-  if (!body.title) {
-    return response.status(400).json({ error: "Title missing" });
-  }
-
-  if (!body.author) {
-    return response.status(400).json({ error: "Author missing" });
+  if (!body.title || !body.url || !body.author) {
+    return response.status(400).json({ error: "Title, URL or Author missing" });
   }
 
   const blog = new Blog({

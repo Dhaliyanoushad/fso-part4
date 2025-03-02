@@ -81,6 +81,42 @@ describe("Blog API tests", () => {
 
     assert.strictEqual(response.body.likes, 0, "Likes should default to 0");
   });
+  test("blog without title is not added", async () => {
+    const newBlog = {
+      author: "No Title Author",
+      url: "https://example.com/missing-title",
+      likes: 5,
+    };
+
+    await api.post("/api/blogs").send(newBlog).expect(400); // Expecting Bad Request
+
+    const response = await api.get("/api/blogs");
+
+    assert.strictEqual(
+      response.body.length,
+      initialBlogs.length,
+      "Blog count should not increase"
+    );
+  });
+
+  test("blog without url is not added", async () => {
+    const newBlog = {
+      title: "No URL Blog",
+      author: "No URL Author",
+      likes: 8,
+    };
+
+    await api.post("/api/blogs").send(newBlog).expect(400); // Expecting Bad Request
+
+    const response = await api.get("/api/blogs");
+
+    assert.strictEqual(
+      response.body.length,
+      initialBlogs.length,
+      "Blog count should not increase"
+    );
+  });
+
   after(async () => {
     await mongoose.connection.close();
   });
