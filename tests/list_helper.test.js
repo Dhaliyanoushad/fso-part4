@@ -2,7 +2,7 @@ const { test, describe } = require("node:test");
 const assert = require("node:assert");
 const _ = require("lodash");
 const listHelper = require("../utils/list_helper");
-
+// list of blogs
 const emptyList = [];
 const listWithOneBlog = [
   {
@@ -45,7 +45,7 @@ const blogs = [
     title: "First class tests",
     author: "Robert C. Martin",
     url: "http://blog.cleancoder.com/uncle-bob/2017/05/05/TestDefinitions.htmll",
-    likes: 10,
+    likes: 0,
     __v: 0,
   },
   {
@@ -65,12 +65,12 @@ const blogs = [
     __v: 0,
   },
 ];
-
+// dummy test
 test("dummy returns one", () => {
   const blogs = [];
   assert.strictEqual(listHelper.dummy(blogs), 1);
 });
-
+// total likes test
 describe("total likes", () => {
   test("of empty list is zero", () => {
     assert.strictEqual(listHelper.totalLikes(emptyList), 0);
@@ -79,10 +79,10 @@ describe("total likes", () => {
     assert.strictEqual(listHelper.totalLikes(listWithOneBlog), 7);
   });
   test("of a bigger list is calculated right", () => {
-    assert.strictEqual(listHelper.totalLikes(blogs), 48);
+    assert.strictEqual(listHelper.totalLikes(blogs), 38);
   });
 });
-
+// favourite blog test
 describe("favourite blog", () => {
   test("of empty list is zero", () => {
     assert.strictEqual(listHelper.favoriteBlog(emptyList), null);
@@ -102,6 +102,7 @@ describe("favourite blog", () => {
     });
   });
 });
+// most blogs test
 describe("most blogs", () => {
   test("of empty list is zero", () => {
     assert.strictEqual(listHelper.mostBlogsWithLodash(emptyList), null);
@@ -116,6 +117,24 @@ describe("most blogs", () => {
     assert.deepStrictEqual(listHelper.mostBlogsWithLodash(blogs), {
       author: "Robert C. Martin",
       blogs: 3,
+    });
+  });
+});
+// most likes test
+describe("most likes", () => {
+  test("of empty list is zero", () => {
+    assert.strictEqual(listHelper.mostLikesWithLodash(emptyList), null);
+  });
+  test("when list has only one blog equals the likes of that", () => {
+    assert.deepStrictEqual(listHelper.mostLikesWithLodash(listWithOneBlog), {
+      author: "Michael Chan",
+      likes: 7,
+    });
+  });
+  test("of a bigger list is calculated right", () => {
+    assert.deepStrictEqual(listHelper.mostLikesWithLodash(blogs), {
+      author: "Edsger W. Dijkstra",
+      likes: 17,
     });
   });
 });

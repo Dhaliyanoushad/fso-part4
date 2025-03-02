@@ -46,10 +46,36 @@ const mostBlogsWithLodash = (blogs) => {
     blogs: authorCounts[topAuthor],
   };
 };
+const mostLikesWithLodash = (blogs) => {
+  if (blogs.length === 0) {
+    return null;
+  }
+
+  const authorLikes = _.reduce(
+    blogs,
+    (acc, blog) => {
+      acc[blog.author] = (acc[blog.author] || 0) + blog.likes;
+      return acc;
+    },
+    {}
+  );
+  //   console.log(authorLikes);
+
+  const topAuthor = _.maxBy(
+    Object.keys(authorLikes),
+    (author) => authorLikes[author]
+  );
+
+  return {
+    author: topAuthor,
+    likes: authorLikes[topAuthor],
+  };
+};
 
 module.exports = {
   dummy,
   totalLikes,
   favoriteBlog,
   mostBlogsWithLodash,
+  mostLikesWithLodash,
 };
