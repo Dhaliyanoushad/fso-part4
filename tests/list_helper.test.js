@@ -1,5 +1,6 @@
 const { test, describe } = require("node:test");
 const assert = require("node:assert");
+const _ = require("lodash");
 const listHelper = require("../utils/list_helper");
 
 const emptyList = [];
@@ -98,6 +99,23 @@ describe("favourite blog", () => {
       title: "Canonical string reduction",
       author: "Edsger W. Dijkstra",
       likes: 12,
+    });
+  });
+});
+describe("most blogs", () => {
+  test("of empty list is zero", () => {
+    assert.strictEqual(listHelper.mostBlogsWithLodash(emptyList), null);
+  });
+  test("when list has only one blog equals the likes of that", () => {
+    assert.deepStrictEqual(listHelper.mostBlogsWithLodash(listWithOneBlog), {
+      author: "Michael Chan",
+      blogs: 1,
+    });
+  });
+  test("of a bigger list is calculated right", () => {
+    assert.deepStrictEqual(listHelper.mostBlogsWithLodash(blogs), {
+      author: "Robert C. Martin",
+      blogs: 3,
     });
   });
 });
