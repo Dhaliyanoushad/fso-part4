@@ -117,6 +117,21 @@ describe("Blog API tests", () => {
     );
   });
 
+  test("a blog can be deleted", async () => {
+    const response = await api.get("/api/blogs");
+    const blogToDelete = response.body[0];
+
+    await api.delete(`/api/blogs/${blogToDelete.id}`).expect(204);
+
+    const blogsAtEnd = await api.get("/api/blogs");
+
+    assert.strictEqual(blogsAtEnd.body.length, initialBlogs.length - 1);
+    assert(
+      !blogsAtEnd.body.some((b) => b.id === blogToDelete.id),
+      "Blog is deleted"
+    );
+  });
+
   after(async () => {
     await mongoose.connection.close();
   });
