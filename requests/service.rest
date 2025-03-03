@@ -1,4 +1,4 @@
-DELETE  http://localhost:3001/api/blogs/67bcb53b768eb0b5e677ccd7
+DELETE  http://localhost:3001/api/blogs/67c5ea3f51babaa1ea0d46f2
 ###
 GET http://localhost:3001/api/blogs
 ###
@@ -10,10 +10,11 @@ POST http://localhost:3001/api/blogs
 Content-Type: application/json
 
 {
-    "title": "Ala",
-    "author": "Dana",
-    "url": "http://example.com/new-blog",
-    "likes": 0
+    "title": "RESTful API Design",
+    "author": "David Lee",
+    "url": "http://example.com/restful-api",
+    "likes": 12,
+    "userId": "67c5eb7d51babaa1ea0d471b"
 }
 
 ###
@@ -24,7 +25,8 @@ Content-Type: application/json
     "title": "Pravasi",
     "author": "Author Name",
     "url": "http://example.com/new-blog",
-    "likes": 0
+    "likes": 0,
+    "userId": "67c5eb9651babaa1ea0d4721"
 }
 
 ###
@@ -35,8 +37,8 @@ POST http://localhost:3001/api/users
 Content-Type: application/json
 
 {
-    "username": "newuser12",
-    "name": "New User",
-    "password": "12"
-}
+    "username": "api_expert",
+    "name": "David Lee",
+    "password": "restfulapi"
+  }
 
