@@ -1,11 +1,12 @@
-DELETE  http://localhost:3001/api/blogs/67c5ea3f51babaa1ea0d46f2
-###
+# Get all blogs
 GET http://localhost:3001/api/blogs
+
 ###
+# Get a specific blog
 GET http://localhost:3001/api/blogs/67bcb53b768eb0b5e677ccd7
+
 ###
-GET http://localhost:3001/info
-###
+# Create a new blog
 POST http://localhost:3001/api/blogs
 Content-Type: application/json
 
@@ -18,6 +19,7 @@ Content-Type: application/json
 }
 
 ###
+# Update a blog
 PUT http://localhost:3001/api/blogs/67bcb644768eb0b5e677ccee
 Content-Type: application/json
 
@@ -30,15 +32,5 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:3001/api/users
-
-###
-POST http://localhost:3001/api/users
-Content-Type: application/json
-
-{
-    "username": "api_expert",
-    "name": "David Lee",
-    "password": "restfulapi"
-  }
-
+# Delete a blog
+DELETE http://localhost:3001/api/blogs/67c5ea3f51babaa1ea0d46f2
