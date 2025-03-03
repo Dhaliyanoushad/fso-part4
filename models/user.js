@@ -1,9 +1,19 @@
+const { min } = require("lodash");
 const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema({
-  username: String,
+  username: {
+    type: String,
+    required: true,
+    minLength: 3,
+    unique: true,
+  },
   name: String,
-  passwordHash: String,
+  passwordHash: {
+    type: String,
+    required: true,
+    minLength: 3,
+  },
 });
 
 userSchema.set("toJSON", {
