@@ -26,3 +26,17 @@ Content-Type: application/json
     "url": "http://example.com/new-blog",
     "likes": 0
 }
+
+###
+GET http://localhost:3001/api/users
+
+###
+POST http://localhost:3001/api/users
+Content-Type: application/json
+
+{
+    "username": "newuser",
+    "name": "New User",
+    "password": "12345678"
+}
+
